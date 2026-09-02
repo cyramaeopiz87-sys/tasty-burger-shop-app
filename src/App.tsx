@@ -68,36 +68,48 @@ function App() {
 
   return (
     <div>
-      <header>
-        <h1>🍔 Tasty Burger Shop</h1>
+    <header className="navbar">
+  <div className="logo">
+    <img
+  className="logo-icon"
+  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9PlYPTlJob_5lw6-zmzwTvv-t9iWB0klHK87OKFTZyA&s=10"
+  alt="Burger logo"
+/>
+  </div>
 
-        <nav>
-          <a href="#">Home</a>
-          <a href="#">Menu</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-          <button>🛒 Cart ({totalItems})</button>
-        </nav>
-      </header>
+  <nav>
+    <a href="#">ABOUT</a>
+    <a href="#">OUR MENU</a>
+    <a href="#">SHOP</a>
+    <a href="#">CONTACT</a>
+
+    <button className="cart-button">
+      🛒
+      <span className="cart-badge">{totalItems}</span>
+    </button>
+  </nav>
+</header>
 
       <main>
-        <section className="hero-section">
-          <h2>Delicious Burgers, Made for You!</h2>
+       <section className="hero-section">
+        <p className="hero-small-text">WELCOME TO TASTY BURGER</p>
 
-          <p>
-            Fresh ingredients, juicy burgers, and amazing flavors.
-          </p>
+        <h2>OUR CRAZY BURGER</h2>
 
-          <button>Order Now</button>
-        </section>
+       <p className="hero-description">
+         Delicious burgers made with fresh ingredients,
+         juicy patties, and flavors you'll love.
+      </p>
 
-        <section className="menu-section">
-          <h2>Our Popular Burgers</h2>
+      
+      </section>
 
-          <div className="burger-grid">
-            {burgers.map((burger) => {
-              const quantity = cart[burger.id] || 0
+     <section className="menu-section">
+      <h2>Our Popular Burgers</h2>
 
+        <div className="burger-grid">
+          {burgers.map((burger) => {
+             const quantity = cart[burger.id] || 0
               return (
                 <div className="burger-card" key={burger.id}>
                  <div className="burger-image">

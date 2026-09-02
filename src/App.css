@@ -10,14 +10,13 @@ body {
 }
 
 header {
-  background: #d62828;
-  color: white;
-  padding: 20px 60px;
+  background: white;
+  color: black;
+  padding: 25px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 header h1 {
   margin: 0;
   font-size: 28px;
@@ -30,9 +29,16 @@ nav {
 }
 
 nav a {
-  color: white;
+  color: black;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
+}
+ 
+
+.logo-icon {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
 }
 
 button {
