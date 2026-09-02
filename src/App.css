@@ -181,7 +181,7 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 10px 0 5px 0;
+  margin: 10px 0 5px 0; 
 }
 .burger-rating {
   display: flex;
@@ -198,7 +198,7 @@ button:hover {
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: #888;
+  color: #ec4242;
   padding: 0;
 }
 .favorite-button:hover {

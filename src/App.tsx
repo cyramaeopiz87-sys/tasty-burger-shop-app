@@ -42,6 +42,7 @@ const burgers: Burger[] = [
 
 function App() {
   const [cart, setCart] = useState<Record<number, number>>({})
+  const [favorites, setFavorites] = useState<Record<number, boolean>>({}) 
 
   const addToCart = (id: number) => {
     setCart((current) => ({
@@ -49,6 +50,12 @@ function App() {
       [id]: (current[id] || 0) + 1,
     }))
   }
+  const toggleFavorite = (id: number) => {
+  setFavorites((current) => ({
+    ...current,
+    [id]: !current[id],
+  }))
+}
 
   const removeFromCart = (id: number) => {
     setCart((current) => {
@@ -119,7 +126,7 @@ function App() {
                     <img src={burger.image} alt={burger.name} />
                   </div>
 
-                  {/* Stars on Left | Heart on Right */}
+                  
                   <div className="burger-card-header">
                     <div className="burger-rating">
                       {[1, 2, 3, 4, 5].map((star) => (
@@ -138,8 +145,13 @@ function App() {
                       ))}
                     </div>
 
-                    <button className="favorite-button">♡</button>
-                  </div>
+                    <button
+                     className="favorite-button"
+                     onClick={() => toggleFavorite(burger.id)}
+                    >
+                      {favorites[burger.id] ? '♥' : '♡'}
+                    </button>
+                  </div>  
 
                   <h3>{burger.name}</h3>
 
