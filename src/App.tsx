@@ -43,6 +43,7 @@ const burgers: Burger[] = [
 function App() {
   const [cart, setCart] = useState<Record<number, number>>({})
   const [favorites, setFavorites] = useState<Record<number, boolean>>({}) 
+  const [selectedBurger, setSelectedBurger] = useState<Burger | null>(null)
 
   const addToCart = (id: number) => {
     setCart((current) => ({
@@ -121,7 +122,11 @@ function App() {
             {burgers.map((burger) => {
               const quantity = cart[burger.id] || 0
               return (
-                <div className="burger-card" key={burger.id}>
+              <div
+                className="burger-card"
+                key={burger.id}
+                onClick={() => setSelectedBurger(burger)}
+                >
                   <div className="burger-image">
                     <img src={burger.image} alt={burger.name} />
                   </div>
@@ -145,11 +150,14 @@ function App() {
                       ))}
                     </div>
 
-                    <button
-                     className="favorite-button"
-                     onClick={() => toggleFavorite(burger.id)}
-                    >
-                      {favorites[burger.id] ? '♥' : '♡'}
+                   <button
+                    className="favorite-button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleFavorite(burger.id)
+                    }}
+                      >
+                    {favorites[burger.id] ? '♥' : '♡'}
                     </button>
                   </div>  
 
@@ -160,27 +168,75 @@ function App() {
                   <strong>₱{burger.price}</strong>
 
                   {quantity === 0 ? (
-                    <button onClick={() => addToCart(burger.id)}>
-                      Add to Cart
-                    </button>
-                  ) : (
-                    <div className="quantity-controls">
-                      <button onClick={() => removeFromCart(burger.id)}>
-                        −
-                      </button>
+  <button
+    onClick={(e) => {
+      e.stopPropagation()
+      addToCart(burger.id)
+    }}
+  >
+    Add to Cart
+  </button>
+) : (
+  <div className="quantity-controls">
+    <button
+      onClick={(e) => {
+        e.stopPropagation()
+        removeFromCart(burger.id)
+      }}
+    >
+      −
+    </button>
 
-                      <span>{quantity}</span>
+    <span>{quantity}</span>
 
-                      <button onClick={() => addToCart(burger.id)}>
-                        +
-                      </button>
-                    </div>
-                  )}
+    <button
+      onClick={(e) => {
+        e.stopPropagation()
+        addToCart(burger.id)
+      }}
+    >
+      +
+    </button>
+  </div>
+)}
                 </div>
               )
             })}
           </div>
         </section>
+                {selectedBurger && (
+          <div
+            className="burger-modal"
+            onClick={() => setSelectedBurger(null)}
+          >
+            <div
+              className="burger-modal-content"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="close-modal"
+                onClick={() => setSelectedBurger(null)}
+              >
+                ×
+              </button>
+
+              <img
+                src={selectedBurger.image}
+                alt={selectedBurger.name}
+              />
+
+              <h2>{selectedBurger.name}</h2>
+
+              <div className="burger-rating">
+                ⭐ {selectedBurger.rating}
+              </div>
+
+              <p>{selectedBurger.description}</p>
+
+              <strong>₱{selectedBurger.price}</strong>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   )

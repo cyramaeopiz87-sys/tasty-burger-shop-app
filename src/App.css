@@ -207,3 +207,60 @@ button:hover {
 .favorite-button:hover {
   color: #d62828;
 }
+.burger-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.burger-modal-content {
+  position: relative;
+  background: white;
+  width: 90%;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.burger-modal-content img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.burger-modal-content h2 {
+  margin: 20px 0 10px;
+}
+
+.burger-modal-content p {
+  color: #666;
+  line-height: 1.5;
+}
+
+.burger-modal-content strong {
+  display: block;
+  font-size: 24px;
+  color: #d62828;
+  margin-top: 15px;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  font-size: 28px;
+  padding: 5px 10px;
+  color: #333;
+}
+
+.close-modal:hover {
+  background: none;
+  color: #d62828;
+}
