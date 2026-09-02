@@ -1,121 +1,138 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
+type Burger = {
+  id: number
+  name: string
+  description: string
+  price: number
+  image: string
+}
+const burgers: Burger[] = [
+  {
+    id: 1,
+    name: 'Classic Cheeseburger',
+    description: 'Juicy beef patty with fresh vegetables and melted cheese.',
+    price: 99,
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvkQBdhYrMLNJa6AViIxafWLWg0L7slbjKaPhPb2UAjg&s=10',
+  },
+  {
+    id: 2,
+    name: 'Bacon Burger',
+    description: 'Crispy bacon, beef patty, cheese, and our special sauce.',
+    price: 129,
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXi18ws8vNJxwV-PyIDrqsZ3shJczekQHjMWnWVRIw&s=10',
+  },
+  {
+    id: 3,
+    name: 'Double Burger',
+    description: 'Two juicy beef patties with cheese and fresh toppings.',
+    price: 149,
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOSaOybXw5TSWwWdBSUFmlYQFRi6KMFdrRHf4QLzgWnA&s=10',
+  },
+]
 function App() {
-  const [count, setCount] = useState(0)
+  const [cart, setCart] = useState<Record<number, number>>({})
+
+  const addToCart = (id: number) => {
+    setCart((current) => ({
+      ...current,
+      [id]: (current[id] || 0) + 1,
+    }))
+  }
+
+  const removeFromCart = (id: number) => {
+    setCart((current) => {
+      const quantity = current[id] || 0
+
+      if (quantity <= 1) {
+        const updated = { ...current }
+        delete updated[id]
+        return updated
+      }
+
+      return {
+        ...current,
+        [id]: quantity - 1,
+      }
+    })
+  }
+
+  const totalItems = Object.values(cart).reduce(
+    (total, quantity) => total + quantity,
+    0
+  )
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
+    <div>
+      <header>
+        <h1>🍔 Tasty Burger Shop</h1>
+
+        <nav>
+          <a href="#">Home</a>
+          <a href="#">Menu</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <button>🛒 Cart ({totalItems})</button>
+        </nav>
+      </header>
+
+      <main>
+        <section className="hero-section">
+          <h2>Delicious Burgers, Made for You!</h2>
+
           <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+            Fresh ingredients, juicy burgers, and amazing flavors.
           </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+          <button>Order Now</button>
+        </section>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <section className="menu-section">
+          <h2>Our Popular Burgers</h2>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+          <div className="burger-grid">
+            {burgers.map((burger) => {
+              const quantity = cart[burger.id] || 0
+
+              return (
+                <div className="burger-card" key={burger.id}>
+                 <div className="burger-image">
+                  <img src={burger.image} alt={burger.name} />
+                  </div>
+                  <h3>{burger.name}</h3>
+
+                  <p>{burger.description}</p>
+
+                  <strong>₱{burger.price}</strong>
+
+                  {quantity === 0 ? (
+                    <button onClick={() => addToCart(burger.id)}>
+                      Add to Cart
+                    </button>
+                  ) : (
+                    <div className="quantity-controls">
+                      <button onClick={() => removeFromCart(burger.id)}>
+                        −
+                      </button>
+
+                      <span>{quantity}</span>
+
+                      <button onClick={() => addToCart(burger.id)}>
+                        +
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </section>
+      </main>
+    </div>
   )
 }
 
