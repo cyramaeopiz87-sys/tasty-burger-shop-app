@@ -11,27 +11,24 @@ body {
 
 header {
   background: white;
-  color: black;
-  padding: 25px 60px;
+  color: rgb(226, 108, 34);
+  padding: 8px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-header h1 {
-  margin: 0;
-  font-size: 28px;
-}
+
 
 nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
 }
 
 nav a {
   color: black;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 200;
 }
  
 
@@ -55,16 +52,20 @@ button:hover {
   opacity: 0.85;
 }
 
-.hero-section {
-  text-align: center;
-  padding: 70px 20px;
-  background: #ffe8cc;
-}
+  .hero-section {
+    text-align: center;
+    padding: 5px 20px;
+    background: #ffe8cc;
+  }
 
 .hero-section h2 {
   font-size: 38px;
-  margin-bottom: 15px;
-  color: #333;
+  margin: 10px auto 20px;
+  color: white;
+  background: #ef9629;
+  padding: 12px 30px;
+  width: fit-content;
+  border-radius: 6px;
 }
 
 .hero-section p {

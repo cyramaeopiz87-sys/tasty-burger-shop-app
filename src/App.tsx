@@ -74,7 +74,7 @@ function App() {
   className="logo-icon"
   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9PlYPTlJob_5lw6-zmzwTvv-t9iWB0klHK87OKFTZyA&s=10"
   alt="Burger logo"
-/>
+/> 
   </div>
 
   <nav>
@@ -92,13 +92,16 @@ function App() {
 
       <main>
        <section className="hero-section">
-        <p className="hero-small-text">WELCOME TO TASTY BURGER</p>
 
         <h2>OUR CRAZY BURGER</h2>
 
        <p className="hero-description">
-         Delicious burgers made with fresh ingredients,
-         juicy patties, and flavors you'll love.
+         <p className="hero-description">
+          Get ready for a wild ride of flavors! Our crazy burgers are loaded
+          with juicy patties, bold toppings, and irresistible sauces, all
+          stacked on a perfectly toasted bun. Whether you like it cheesy or
+          extra meaty, we've got a burger that will blow your mind!
+</p>
       </p>
 
       
