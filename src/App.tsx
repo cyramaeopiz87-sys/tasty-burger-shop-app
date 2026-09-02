@@ -8,6 +8,7 @@ type Burger = {
   price: number
   image: string
   rating: number
+  ingredients?: string[]
 }
 
 const burgers: Burger[] = [
@@ -19,6 +20,7 @@ const burgers: Burger[] = [
     rating: 4.5,
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvkQBdhYrMLNJa6AViIxafWLWg0L7slbjKaPhPb2UAjg&s=10',
+      ingredients: ["Beef Patty", "Cheddar Cheese", "Lettuce", "Tomato", "Pickles"]
   },
   {
     id: 2,
@@ -28,6 +30,7 @@ const burgers: Burger[] = [
     rating: 4,
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXi18ws8vNJxwV-PyIDrqsZ3shJczekQHjMWnWVRIw&s=10',
+      ingredients: ["Beef Patty", "Crispy Bacon", "Cheddar Cheese", "Special Sauce"]
   },
   {
     id: 3,
@@ -37,8 +40,10 @@ const burgers: Burger[] = [
     rating: 5,
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOSaOybXw5TSWwWdBSUFmlYQFRi6KMFdrRHf4QLzgWnA&s=10',
+      ingredients: ["2 Beef Patties", "Double Cheddar Cheese", "Red Onion", "Pickles", "Burger Sauce"]
   },
 ]
+
 
 function App() {
   const [cart, setCart] = useState<Record<number, number>>({})
@@ -232,6 +237,15 @@ function App() {
               </div>
 
               <p>{selectedBurger.description}</p>
+              {/* Ingredients tag list */}
+              <div className="modal-ingredients">
+                <h4>Ingredients:</h4>
+                <div className="ingredient-tags">
+                  {selectedBurger.ingredients?.map((item, index) => (
+                    <span key={index} className="ingredient-tag">{item}</span>
+                  ))}
+                </div>
+              </div>
 
               <strong>₱{selectedBurger.price}</strong>
             </div>
