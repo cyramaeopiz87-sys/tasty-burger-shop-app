@@ -169,3 +169,33 @@ button:hover {
     padding: 30px 20px;
   }
 }
+.burger-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.burger-rating {
+  display: flex;
+  gap: 2px;
+}
+.star {
+  font-size: 16px;
+  color: #ddd;
+}
+.star.full {
+  color: #fcbf49; 
+}.favorite-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  padding: 0;
+}
+.favorite-button:hover {
+  color: #d62828;
+}
+.favorite-button:hover {
+  color: #d62828;
+}

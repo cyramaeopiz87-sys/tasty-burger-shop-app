@@ -7,13 +7,16 @@ type Burger = {
   description: string
   price: number
   image: string
+  rating: number
 }
+
 const burgers: Burger[] = [
   {
     id: 1,
     name: 'Classic Cheeseburger',
     description: 'Juicy beef patty with fresh vegetables and melted cheese.',
     price: 99,
+    rating: 4.5,
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvkQBdhYrMLNJa6AViIxafWLWg0L7slbjKaPhPb2UAjg&s=10',
   },
@@ -22,6 +25,7 @@ const burgers: Burger[] = [
     name: 'Bacon Burger',
     description: 'Crispy bacon, beef patty, cheese, and our special sauce.',
     price: 129,
+    rating: 4,
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXi18ws8vNJxwV-PyIDrqsZ3shJczekQHjMWnWVRIw&s=10',
   },
@@ -30,10 +34,12 @@ const burgers: Burger[] = [
     name: 'Double Burger',
     description: 'Two juicy beef patties with cheese and fresh toppings.',
     price: 149,
+    rating: 5,
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOSaOybXw5TSWwWdBSUFmlYQFRi6KMFdrRHf4QLzgWnA&s=10',
   },
 ]
+
 function App() {
   const [cart, setCart] = useState<Record<number, number>>({})
 
@@ -68,56 +74,73 @@ function App() {
 
   return (
     <div>
-    <header className="navbar">
-  <div className="logo">
-    <img
-  className="logo-icon"
-  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9PlYPTlJob_5lw6-zmzwTvv-t9iWB0klHK87OKFTZyA&s=10"
-  alt="Burger logo"
-/> 
-  </div>
+      <header className="navbar">
+        <div className="logo">
+          <img
+            className="logo-icon"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9PlYPTlJob_5lw6-zmzwTvv-t9iWB0klHK87OKFTZyA&s=10"
+            alt="Burger logo"
+          />
+        </div>
 
-  <nav>
-    <a href="#">ABOUT</a>
-    <a href="#">OUR MENU</a>
-    <a href="#">SHOP</a>
-    <a href="#">CONTACT</a>
+        <nav>
+          <a href="#">ABOUT</a>
+          <a href="#">OUR MENU</a>
+          <a href="#">SHOP</a>
+          <a href="#">CONTACT</a>
 
-    <button className="cart-button">
-      🛒
-      <span className="cart-badge">{totalItems}</span>
-    </button>
-  </nav>
-</header>
+          <button className="cart-button">
+            🛒
+            <span className="cart-badge">{totalItems}</span>
+          </button>
+        </nav>
+      </header>
 
       <main>
-       <section className="hero-section">
+        <section className="hero-section">
+          <h2>OUR CRAZY BURGER</h2>
+          <p className="hero-description">
+            Get ready for a wild ride of flavors! Our crazy burgers are loaded
+            with juicy patties, bold toppings, and irresistible sauces, all
+            stacked on a perfectly toasted bun. Whether you like it cheesy or
+            extra meaty, we've got a burger that will blow your mind!
+          </p>
+        </section>
 
-        <h2>OUR CRAZY BURGER</h2>
+        <section className="menu-section">
+          <h2>Our Popular Burgers</h2>
 
-       <p className="hero-description">
-         <p className="hero-description">
-          Get ready for a wild ride of flavors! Our crazy burgers are loaded
-          with juicy patties, bold toppings, and irresistible sauces, all
-          stacked on a perfectly toasted bun. Whether you like it cheesy or
-          extra meaty, we've got a burger that will blow your mind!
-</p>
-      </p>
-
-      
-      </section>
-
-     <section className="menu-section">
-      <h2>Our Popular Burgers</h2>
-
-        <div className="burger-grid">
-          {burgers.map((burger) => {
-             const quantity = cart[burger.id] || 0
+          <div className="burger-grid">
+            {burgers.map((burger) => {
+              const quantity = cart[burger.id] || 0
               return (
                 <div className="burger-card" key={burger.id}>
-                 <div className="burger-image">
-                  <img src={burger.image} alt={burger.name} />
+                  <div className="burger-image">
+                    <img src={burger.image} alt={burger.name} />
                   </div>
+
+                  {/* Stars on Left | Heart on Right */}
+                  <div className="burger-card-header">
+                    <div className="burger-rating">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <span
+                          key={star}
+                          className={
+                            burger.rating >= star
+                              ? 'star full'
+                              : burger.rating >= star - 0.5
+                              ? 'star half'
+                              : 'star empty'
+                          }
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+
+                    <button className="favorite-button">♡</button>
+                  </div>
+
                   <h3>{burger.name}</h3>
 
                   <p>{burger.description}</p>
